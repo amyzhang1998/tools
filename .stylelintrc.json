@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss"
+  ],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "function-name-case": null,
+    "at-rule-empty-line-before": null,
+    "block-closing-brace-newline-after": null
+  }
+}
