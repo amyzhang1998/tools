@@ -37,6 +37,7 @@
     "lint-staged": "^9.5.0",
     "node-sass": "^4.13.0",
     "npm": "^6.13.4",
+    "null-loader": "^3.0.0",
     "prettier": "^1.19.1",
     "stylelint": "^12.0.0",
     "stylelint-config-recommended-scss": "^4.1.0",
