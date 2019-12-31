@@ -1,21 +1,26 @@
 import React from 'react';
-import { Typography } from 'antd';
-import styles from './index.scss';
+import { getWebsiteGroups, WebsiteGroup } from '../services/website';
+import WebsiteGroupComp from '../components/website/WebsiteGroup';
 
-const { Title } = Typography;
-
-export interface HomeProps {
-  url: string;
+interface HomeProps {
+  websites: WebsiteGroup[];
 }
 
 const Home = (props: HomeProps) => {
-  const { url } = props;
-  return <Title className={styles.root}>您的IP是:{url}</Title>;
+  const { websites } = props;
+  return (
+    <div>
+      {websites.map((group) => (
+        <WebsiteGroupComp key={group.id} data={group} />
+      ))}
+    </div>
+  );
 };
 
-Home.getInitialProps = async ({ req }): Promise<HomeProps> => {
+Home.getInitialProps = async () => {
+  const groups = await getWebsiteGroups();
   return {
-    url: req.connection.remoteAddress
+    websites: groups
   };
 };
 

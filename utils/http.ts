@@ -3,12 +3,10 @@ import { isBrowser } from './env';
 
 let host = '';
 if (!isBrowser) {
-  if (process.env.REMOTE_HOST) {
-    host = process.env.REMOTE_HOST;
-  }
+  host = process.env.REMOTE_HOST || 'http://127.0.0.1:7001';
 }
 
-const instance = axios.create({ 
+const instance = axios.create({
   baseURL: host
 });
 
