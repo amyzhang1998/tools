@@ -4,8 +4,11 @@ tag="littledian/tools-$timestamp"
 
 docker build -t "$tag" .
 
-docker container stop tools
-docker container rm tools
+have=$(docker inspect --format='{{.Name}}' $(docker ps -aq) |grep mysql  | cut -d"/" -f2)
+if ($have) then
+  docker container stop tools
+  docker container rm tools
+fi
 
 tags=$(docker images | grep littledian/tool | awk '{print $2}')
 for item in tags
