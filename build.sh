@@ -10,7 +10,7 @@ if [[ $have == "tools" ]]; then
   docker container rm tools
 fi
 
-tags=$(docker images | grep littledian/tool | awk '{print $2}')
+tags=$(docker images | grep littledian/tools | awk '{print $2}')
 for item in $tags
 do
   if [[ $tag != "littledian/tools:$item" ]]; then
