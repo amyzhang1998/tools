@@ -13,7 +13,7 @@ fi
 tags=$(docker images | grep littledian/tool | awk '{print $2}')
 for item in $tags
 do
-  if [[ $tag != $item ]]; then
+  if [[ $tag != "littledian/tools:$item" ]]; then
         docker rmi littledian/tools:$item
   fi
 done
