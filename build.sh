@@ -4,7 +4,7 @@ tag="littledian/tools-$timestamp"
 
 docker build -t "$tag" .
 
-have=$(docker inspect --format='{{.Name}}' $(docker ps -aq) |grep mysql  | cut -d"/" -f2)
+have=$(docker inspect --format='{{.Name}}' $(docker ps -aq) |grep tools  | cut -d"/" -f2)
 if ($have) then
   docker container stop tools
   docker container rm tools
