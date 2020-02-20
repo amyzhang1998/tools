@@ -1,0 +1,22 @@
+.root {
+  display: block;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.col {
+  display: block;
+  width: 20px;
+  height: 20px;
+
+  &:global(.color-0) {
+    background: #000;
+  }
+
+  &:global(.color-1) {
+    background: #096dd9;
+  }
+}

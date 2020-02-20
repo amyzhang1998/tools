@@ -12,8 +12,8 @@ export default class App extends NextApp {
     return (
       <div className={styles.root}>
         <div className={styles.main}>
-          <div className={styles.menu}>
-            {router.asPath !== '/' && (
+          {router.asPath !== '/' && (
+            <div className={styles.menu}>
               <Menu mode="inline" selectedKeys={[router.asPath]}>
                 <MenuItem key="/website">
                   <Link href="/website">
@@ -21,8 +21,8 @@ export default class App extends NextApp {
                   </Link>
                 </MenuItem>
               </Menu>
-            )}
-          </div>
+            </div>
+          )}
           <div className={styles.content}>
             <Component {...pageProps} />
           </div>
