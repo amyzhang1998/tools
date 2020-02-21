@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Button } from 'antd';
-import LTetromino from '../services/tetris/LTetromino';
+import TetriContainer from '../services/tetris/TetriContainer';
 import styles from './index.scss';
 
-const instance = new LTetromino(10, 20, 1);
+const instance = new TetriContainer({ width: 10, height: 20 });
 
 const Home = () => {
-  const [grid, setGrid] = useState(instance.current);
+  const [grid, setGrid] = useState(instance.grid);
 
   function handleTransform(type: 'up' | 'down' | 'left' | 'right' | 'transform') {
     switch (type) {
-      case 'up':
-        instance.up(true);
-        break;
       case 'down':
-        instance.down(true);
+        instance.down();
         break;
       case 'left':
-        instance.left(true);
+        instance.left();
         break;
       case 'right':
-        instance.right(true);
+        instance.right();
         break;
       case 'transform':
-        instance.transform(true);
+        instance.transform();
         break;
     }
-    setGrid(instance.current);
+    setGrid(instance.grid);
   }
 
   return (
@@ -46,7 +43,6 @@ const Home = () => {
           </div>
         );
       })}
-      <Button onClick={handleTransform.bind(null, 'up')}>Up</Button>
       <Button onClick={handleTransform.bind(null, 'down')}>Down</Button>
       <Button onClick={handleTransform.bind(null, 'left')}>Left</Button>
       <Button onClick={handleTransform.bind(null, 'right')}>Right</Button>

@@ -15,12 +15,13 @@ export default class BaseTetromino {
     return res;
   }
 
+  posX = 0;
+  poxY = 0;
+
   protected _current: Grid;
   protected _width: number;
   protected _height: number;
   protected _value: number;
-  protected _posX = 0;
-  protected _posY = 0;
 
   constructor(width: number, height: number, value: number) {
     this._width = width;
@@ -43,7 +44,6 @@ export default class BaseTetromino {
     );
     temp.splice(temp.length - 1, 1);
     if (commit) this._current = temp;
-    this._posY++;
     return temp;
   }
 
@@ -60,7 +60,6 @@ export default class BaseTetromino {
         .map(() => undefined)
     );
     if (commit) this._current = temp;
-    this._posY--;
     return temp;
   }
 
@@ -74,7 +73,6 @@ export default class BaseTetromino {
       item.push(undefined);
     });
     if (commit) this._current = temp;
-    this._posX--;
     return temp;
   }
 
@@ -88,7 +86,6 @@ export default class BaseTetromino {
       item.splice(item.length - 1, 1);
     });
     if (commit) this._current = temp;
-    this._posX++;
     return temp;
   }
 
