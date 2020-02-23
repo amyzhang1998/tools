@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Button } from 'antd';
 import TetriContainer from '../services/tetris/TetriContainer';
 import styles from './index.scss';
 
@@ -9,23 +8,47 @@ const instance = new TetriContainer({ width: 10, height: 20 });
 const Home = () => {
   const [grid, setGrid] = useState(instance.grid);
 
-  function handleTransform(type: 'up' | 'down' | 'left' | 'right' | 'transform') {
-    switch (type) {
-      case 'down':
-        instance.down();
-        break;
-      case 'left':
-        instance.left();
-        break;
-      case 'right':
-        instance.right();
-        break;
-      case 'transform':
-        instance.transform();
-        break;
+  useEffect(() => {
+    function handleKeydown(e: KeyboardEvent) {
+      const effectKeys = ['KeyA', 'KeyS', 'KeyD', 'KeyJ'];
+      const keyCode = e.code;
+      if (effectKeys.indexOf(keyCode) === -1) {
+        return;
+      }
+      switch (keyCode) {
+        case 'KeyA':
+          instance.left();
+          break;
+        case 'KeyS':
+          instance.down();
+          break;
+        case 'KeyD':
+          instance.right();
+          break;
+        case 'KeyJ':
+          instance.transform();
+          break;
+      }
+      setGrid(instance.grid);
     }
-    setGrid(instance.grid);
-  }
+
+    window.addEventListener('keydown', handleKeydown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeydown);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      instance.down();
+      setGrid(instance.grid);
+
+      return () => {
+        clearInterval(timer);
+      };
+    }, 1000);
+  }, []);
 
   return (
     <div className={styles.root}>
@@ -43,10 +66,12 @@ const Home = () => {
           </div>
         );
       })}
-      <Button onClick={handleTransform.bind(null, 'down')}>Down</Button>
-      <Button onClick={handleTransform.bind(null, 'left')}>Left</Button>
-      <Button onClick={handleTransform.bind(null, 'right')}>Right</Button>
-      <Button onClick={handleTransform.bind(null, 'transform')}>Transform</Button>
+      <div className={styles.tooltips}>
+        <span className={styles.tip}>Left: A</span>
+        <span className={styles.tip}>Right: D</span>
+        <span className={styles.tip}>Speed up: S</span>
+        <span className={styles.tip}>Transform: J</span>
+      </div>
     </div>
   );
 };

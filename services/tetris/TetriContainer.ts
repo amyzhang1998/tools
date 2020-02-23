@@ -1,8 +1,10 @@
 import BaseTetromino from './BaseTetromino';
 import { Grid } from './interface';
 import LTetromino from './LTetromino';
+import OTetromino from './OTetromino';
+import ITetromino from './ITetromino';
 
-const tetrominoList: Array<typeof BaseTetromino> = [LTetromino];
+const tetrominoList: Array<typeof BaseTetromino> = [LTetromino, OTetromino, ITetromino];
 
 export const tetrominoValueMap = new Map<typeof BaseTetromino, number>();
 tetrominoList.forEach((type, index) => {
@@ -94,6 +96,7 @@ export default class TetriContainer {
     const temp = this._current.transform(false);
     if (!temp) return;
     if (!TetriContainer.validateGrid(temp, this._container)) return;
+    this._current.nextState();
     this._current.current = temp;
   }
 
@@ -113,7 +116,33 @@ export default class TetriContainer {
 
   private _nextTetromino() {
     this._container = this.grid;
+    this._removeFullRow();
     const Type = randomTetromino();
     this._current = new Type(this._width, this._height, tetrominoValueMap.get(Type));
+  }
+
+  private _removeFullRow() {
+    let count = 0;
+    for (let i = this._height - 1; i >= 0; i--) {
+      const row = this._container[i];
+      let j = 0;
+      for (; j < row.length; j++) {
+        if (!row[j]) break;
+      }
+      if (j === row.length) {
+        count++;
+        this._container.splice(i, 1);
+      }
+    }
+
+    while (count > 0) {
+      this._container.unshift(
+        new Array(this._width)
+          .join(',')
+          .split(',')
+          .map(() => undefined)
+      );
+      count--;
+    }
   }
 }

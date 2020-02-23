@@ -19,4 +19,24 @@
   &:global(.color-1) {
     background: #096dd9;
   }
+
+  &:global(.color-2) {
+    background: #ff0;
+  }
+
+  &:global(.color-3) {
+    background: #fff;
+  }
+}
+
+.tooltips {
+  display: flex;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.tip {
+  margin: 0 8px;
+  font-size: 16px;
+  color: #333;
 }

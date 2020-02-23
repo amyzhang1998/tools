@@ -93,6 +93,10 @@ export default class BaseTetromino {
     return false;
   }
 
+  nextState(): void {
+    // noop
+  }
+
   get current(): Grid {
     return this._current;
   }

@@ -54,12 +54,16 @@ export default class LTetromino extends BaseTetromino {
       temp[y + array[0]][x + 1 + array[1]] = this._value;
     });
     if (commit) this._current = temp;
-    this.status = (this.status + 1) % 4;
     return temp;
   }
 
+  nextState(): void {
+    this.status = (this.status + 1) % 4;
+  }
+
   protected _init() {
-    const left = Math.floor((this._width - 3) / 2);
+    this.status = 0;
+    const left = Math.floor((this._width - 4) / 2);
     const posArray = LTetromino._getPosArray(this.status);
     posArray.forEach((array) => {
       this.current[array[0]][left + 1 + array[1]] = this._value;
