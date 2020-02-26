@@ -32,7 +32,7 @@ export default class ITetromino extends BaseTetromino {
     if (x < 0) x = 0;
     if (x + width + 1 > this._width) x = this._width - width - 1;
     posArray.forEach((array) => {
-      temp[y + array[0]][x + 1 + array[1]] = this._value;
+      temp[y + array[0]][x + array[1]] = this._value;
     });
     if (commit) this._current = temp;
     return temp;

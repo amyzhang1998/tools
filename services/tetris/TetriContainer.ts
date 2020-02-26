@@ -4,7 +4,8 @@ import LTetromino from './LTetromino';
 import OTetromino from './OTetromino';
 import ITetromino from './ITetromino';
 
-const tetrominoList: Array<typeof BaseTetromino> = [LTetromino, OTetromino, ITetromino];
+// const tetrominoList: Array<typeof BaseTetromino> = [LTetromino, OTetromino, ITetromino];
+const tetrominoList: Array<typeof BaseTetromino> = [ITetromino];
 
 export const tetrominoValueMap = new Map<typeof BaseTetromino, number>();
 tetrominoList.forEach((type, index) => {
